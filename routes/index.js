@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const userRouter = require("./users");
-// Add Router for Custom Team and Characters
+const charactersRouter = require("./characters");
 const { auth } = require("../middlewares/auth");
 const {
   validateUserInfoBody,
@@ -15,9 +15,7 @@ router.post("/signin", validateAuthentication, login);
 
 router.post("/signup", validateUserInfoBody, createUser);
 
-// Update afer creating character controller and route
-// router.use("/items", getCharacters);
-// router.use("/items", getAllCharacters);
+router.use("/characters", charactersRouter);
 
 // Auth Needed
 

@@ -7,7 +7,6 @@ const { NotFoundError } = require("../utils/errors/NotFoundError");
 const { ConflictError } = require("../utils/errors/ConflictError");
 const { InternalServerError } = require("../utils/errors/InternalServerError");
 const { JWT_SECRET } = require("../utils/config");
-x;
 // Create New User
 
 const createUser = (req, res, next) => {
