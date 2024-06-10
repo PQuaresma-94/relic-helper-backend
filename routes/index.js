@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const userRouter = require("./users");
 const charactersRouter = require("./characters");
+const customTeamsRouter = require("./customTeams");
 const { auth } = require("../middlewares/auth");
 const {
   validateUserInfoBody,
@@ -20,6 +21,8 @@ router.use("/characters", charactersRouter);
 // Auth Needed
 
 router.use("/users", auth, userRouter);
+
+router.use("/custom-teams", auth, customTeamsRouter);
 
 router.use((req, res, next) => {
   next(new NotFoundError("Requested recource not found."));

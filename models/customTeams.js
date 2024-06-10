@@ -1,29 +1,32 @@
 const mongoose = require("mongoose");
 const validator = require("validator");
 
-const unitSchema = new mongoose.Schema({
-  baseId: {
-    type: String,
-    required: true,
+const unitSchema = new mongoose.Schema(
+  {
+    baseId: {
+      type: String,
+      required: true,
+    },
+    gearLevel: {
+      type: Number,
+      required: true,
+    },
+    relicTier: {
+      type: Number,
+      required: true,
+    },
   },
-  gearLevel: {
-    type: Number,
-    required: true,
-  },
-  relicTier: {
-    type: Number,
-    required: true,
-  },
-});
+  { _id: false }
+);
 
 const customTeamSchema = new mongoose.Schema({
-  teamName: {
+  name: {
     type: String,
     required: true,
     minlength: 2,
     maxlength: 30,
   },
-  teamImage: {
+  image: {
     type: String,
     required: true,
     validate: {
