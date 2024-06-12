@@ -41,7 +41,7 @@ const getRequiredUnits = (req, res, next) => {
         (char) => char.baseId === baseId
       );
       if (character) {
-        res.send(character.requiredUnits);
+        res.send(character);
       } else {
         next(new NotFoundError("Legendary Character not found."));
       }

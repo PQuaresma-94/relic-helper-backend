@@ -51,10 +51,10 @@ const validateCustomTeamBody = celebrate({
 
 const validateCustomTeamId = celebrate({
   params: Joi.object().keys({
-    itemId: Joi.string().length(24).hex().messages({
-      "string.empty": 'The "itemId" field must be filled in',
-      "string.hex": 'The "itemId" field must be a hexadecimal value',
-      "string.length": 'The "itemId" field must be 24 characters long',
+    teamId: Joi.string().length(24).hex().messages({
+      "string.empty": 'The "teamId" field must be filled in',
+      "string.hex": 'The "teamId" field must be a hexadecimal value',
+      "string.length": 'The "teamId" field must be 24 characters long',
     }),
   }),
 });

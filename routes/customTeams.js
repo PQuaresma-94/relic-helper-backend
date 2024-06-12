@@ -6,6 +6,7 @@ const {
 } = require("../middlewares/validation");
 const {
   getCustomTeams,
+  getCustomTeam,
   createCustomTeam,
   deleteCustomTeam,
 } = require("../controllers/customTeams");
@@ -15,6 +16,8 @@ router.get("/", getCustomTeams); // move to Auth after checking teams
 // Auth Needed
 
 router.use(auth);
+
+router.get("/:teamId", validateCustomTeamId, getCustomTeam);
 
 router.post("/", validateCustomTeamBody, createCustomTeam);
 

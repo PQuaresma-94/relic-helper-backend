@@ -3,6 +3,7 @@ const { BadRequestError } = require("../utils/errors/BadRequestError");
 const { ForbiddenError } = require("../utils/errors/ForbiddenError");
 const { NotFoundError } = require("../utils/errors/NotFoundError");
 const { InternalServerError } = require("../utils/errors/InternalServerError");
+const { error } = require("winston");
 
 // GET custom teams
 const getCustomTeams = (req, res, next) => {
@@ -13,6 +14,36 @@ const getCustomTeams = (req, res, next) => {
     .catch((err) => {
       console.error(err);
       next(new InternalServerError());
+    });
+};
+
+// GET custom teams by id
+const getCustomTeam = (req, res, next) => {
+  const { teamId } = req.params;
+  const userId = req.user._id;
+
+  CustomTeam.findById(teamId)
+    .orFail(() => {
+      throw new NotFoundError("Custom team not found");
+    })
+    .then((team) => {
+      if (!team.owner.equals(userId)) {
+        throw new ForbiddenError(
+          "You do not have permission to see this team."
+        );
+      }
+      res.status(200).send(team);
+    })
+    .catch((err) => {
+      console.error(err);
+      if (err.name === "NotFoundError" || err.name === "ForbiddenError") {
+        next(err);
+      }
+      if (err.name === "CastError" || err.name === "ValidationError") {
+        next(new BadRequestError("Invalid data"));
+      } else {
+        next(new InternalServerError());
+      }
     });
 };
 
@@ -56,6 +87,9 @@ const deleteCustomTeam = (req, res, next) => {
     })
     .catch((err) => {
       console.error(err);
+      if (err.name === "NotFoundError" || err.name === "ForbiddenError") {
+        next(err);
+      }
       if (err.name === "CastError" || err.name === "ValidationError") {
         next(new BadRequestError("Invalid data"));
       } else {
@@ -64,4 +98,9 @@ const deleteCustomTeam = (req, res, next) => {
     });
 };
 
-module.exports = { getCustomTeams, createCustomTeam, deleteCustomTeam };
+module.exports = {
+  getCustomTeams,
+  getCustomTeam,
+  createCustomTeam,
+  deleteCustomTeam,
+};
