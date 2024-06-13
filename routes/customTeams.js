@@ -11,11 +11,11 @@ const {
   deleteCustomTeam,
 } = require("../controllers/customTeams");
 
-router.get("/", getCustomTeams); // move to Auth after checking teams
+// Auth Needed (To be added after the first and second stage of the project is completed)
 
-// Auth Needed
+// router.use(auth);
 
-router.use(auth);
+router.get("/", getCustomTeams);
 
 router.get("/:teamId", validateCustomTeamId, getCustomTeam);
 
