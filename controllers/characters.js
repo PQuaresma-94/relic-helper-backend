@@ -15,6 +15,7 @@ const getAllCharacters = (req, res, next) => {
         base_id: character.base_id,
         image: character.image,
       }));
+      getAllCharactersData.sort((a, b) => a.name.localeCompare(b.name));
       res.send(getAllCharactersData);
     })
     .catch(() => {
