@@ -19,16 +19,7 @@ mongoose
 
 app.use(helmet());
 app.use(express.json());
-
-app.use(
-  cors({
-    origin: "https://relichelperproject.jumpingcrab.com",
-    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
-    allowedHeaders: ["Origin", "Content-Type", "X-Auth-Token", "Authorization"],
-    credentials: true,
-  })
-);
-
+app.use(cors());
 app.use(requestLogger);
 app.use("/", mainRouter);
 app.use(errorLogger);
