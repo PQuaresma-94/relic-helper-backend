@@ -27,7 +27,7 @@ router.use("/custom-teams", /*auth , */ customTeamsRouter);
 router.use("/users", auth, userRouter);
 
 router.use((req, res, next) => {
-  next(new NotFoundError("Requested recource not found."));
+  next(new NotFoundError("Requested resource not found."));
 });
 
 module.exports = router;
