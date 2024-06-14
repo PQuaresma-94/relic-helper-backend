@@ -25,7 +25,6 @@ app.use(
     origin: "https://relichelperproject.jumpingcrab.com",
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
     allowedHeaders: ["Origin", "Content-Type", "X-Auth-Token", "Authorization"],
-    credentials: true,
   })
 );
 
