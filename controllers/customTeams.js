@@ -7,9 +7,9 @@ const { error } = require("winston");
 
 // GET custom teams
 const getCustomTeams = (req, res, next) => {
-  // const userId = req.user._id;
+  const userId = req.user._id;
 
-  CustomTeam.find(/* { owner: userId } */)
+  CustomTeam.find({ owner: userId })
     .then((teams) => res.send(teams))
     .catch((err) => {
       console.error(err);
@@ -20,18 +20,18 @@ const getCustomTeams = (req, res, next) => {
 // GET custom teams by id
 const getCustomTeam = (req, res, next) => {
   const { teamId } = req.params;
-  // const userId = req.user._id;
+  const userId = req.user._id;
 
   CustomTeam.findById(teamId)
     .orFail(() => {
       throw new NotFoundError("Custom team not found");
     })
     .then((team) => {
-      // if (!team.owner.equals(userId)) {
-      //   throw new ForbiddenError(
-      //     "You do not have permission to see this team."
-      //   );
-      // }
+      if (!team.owner.equals(userId)) {
+        throw new ForbiddenError(
+          "You do not have permission to see this team."
+        );
+      }
       res.status(200).send(team);
     })
     .catch((err) => {
@@ -50,9 +50,9 @@ const getCustomTeam = (req, res, next) => {
 // POST custom team
 const createCustomTeam = (req, res, next) => {
   const { name, image, requiredUnits } = req.body;
-  // const userId = req.user._id;
+  const userId = req.user._id;
 
-  CustomTeam.create({ name, image, requiredUnits /* , owner: userId */ })
+  CustomTeam.create({ name, image, requiredUnits, owner: userId })
     .then((team) => res.status(201).send(team))
     .catch((err) => {
       console.error(err);
@@ -67,18 +67,18 @@ const createCustomTeam = (req, res, next) => {
 // DELETE custom team
 const deleteCustomTeam = (req, res, next) => {
   const { teamId } = req.params;
-  // const userId = req.user._id;
+  const userId = req.user._id;
 
   CustomTeam.findById(teamId)
     .orFail(() => {
       throw new NotFoundError("Custom team not found");
     })
     .then((team) => {
-      // if (!team.owner.equals(userId)) {
-      //   throw new ForbiddenError(
-      //     "You do not have permission to delete this team."
-      //   );
-      // }
+      if (!team.owner.equals(userId)) {
+        throw new ForbiddenError(
+          "You do not have permission to delete this team."
+        );
+      }
       return team.deleteOne().then(() => {
         res
           .status(200)

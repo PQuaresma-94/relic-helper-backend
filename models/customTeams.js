@@ -49,7 +49,7 @@ const customTeamSchema = new mongoose.Schema({
   owner: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "user",
-    required: false,
+    required: true,
   },
   createdAt: {
     type: Date,
