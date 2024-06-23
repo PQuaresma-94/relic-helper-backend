@@ -3,7 +3,6 @@ const { BadRequestError } = require("../utils/errors/BadRequestError");
 const { ForbiddenError } = require("../utils/errors/ForbiddenError");
 const { NotFoundError } = require("../utils/errors/NotFoundError");
 const { InternalServerError } = require("../utils/errors/InternalServerError");
-const { error } = require("winston");
 
 // GET custom teams
 const getCustomTeams = (req, res, next) => {

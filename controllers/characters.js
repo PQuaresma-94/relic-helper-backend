@@ -8,7 +8,7 @@ const requestOptions = {
 
 const getAllCharacters = (req, res, next) => {
   fetch("https://swgoh.gg/api/characters", requestOptions)
-    .then((res) => res.json())
+    .then((response) => response.json())
     .then((characters) => {
       const getAllCharactersData = characters.map((character) => ({
         name: character.name,
@@ -25,7 +25,7 @@ const getAllCharacters = (req, res, next) => {
 
 const getLegendaryCharacters = (req, res, next) => {
   fetch("https://swgoh.gg/api/gl-checklist/", requestOptions)
-    .then((res) => res.json())
+    .then((response) => response.json())
     .then((legendaryCharacters) => res.send(legendaryCharacters))
     .catch(() => {
       next(new InternalServerError());
