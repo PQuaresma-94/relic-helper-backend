@@ -125,3 +125,11 @@ Note: User must be authorized to get custom teams
     ]
   }' http://localhost:3001/custom-teams/
   ```
+
+## Website Domain
+
+https://relichelperproject.jumpingcrab.com/
+
+## API Domain
+
+https://api.relichelperproject.jumpingcrab.com/
