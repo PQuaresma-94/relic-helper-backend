@@ -10,10 +10,6 @@ Relic Helper Backend is the server-side component of the Relic Helper platform, 
 - **User Management**: Allows the creation of users and secure login functionality.
 - **Custom Team Management**: Enables users to create and delete custom teams.
 
-## Upcoming Features
-
-- **Owner ID for Custom Teams**: Addition of owner ID to custom teams, ensuring only the owner can view and delete their teams.
-
 ## Installation
 
 To get started with the Relic Helper Backend, follow these steps:
@@ -98,6 +94,8 @@ To use the backend services, you can send HTTP requests to the appropriate endpo
   ```bash
   curl -X GET http://localhost:3001/characters/legendary/TBD_KYLO
   ```
+
+Note: User must be authorized to get custom teams
 
 - **Get All Custom Teams**:
   ```bash
